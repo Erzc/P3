@@ -34,9 +34,9 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.numberOfItemsLabel = new System.Windows.Forms.Label();
             this.numberOfItemsTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.usbRadioButton = new System.Windows.Forms.RadioButton();
-            this.mugRadioButton = new System.Windows.Forms.RadioButton();
             this.penRadioButton = new System.Windows.Forms.RadioButton();
+            this.mugRadioButton = new System.Windows.Forms.RadioButton();
+            this.usbRadioButton = new System.Windows.Forms.RadioButton();
             this.textToEngraveLabel = new System.Windows.Forms.Label();
             this.textToEngraveTextBox = new System.Windows.Forms.TextBox();
             this.logoCheckBox = new System.Windows.Forms.CheckBox();
@@ -92,16 +92,16 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Type";
             // 
-            // usbRadioButton
+            // penRadioButton
             // 
-            this.usbRadioButton.AutoSize = true;
-            this.usbRadioButton.Location = new System.Drawing.Point(7, 20);
-            this.usbRadioButton.Name = "usbRadioButton";
-            this.usbRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.usbRadioButton.TabIndex = 0;
-            this.usbRadioButton.TabStop = true;
-            this.usbRadioButton.Text = "USB";
-            this.usbRadioButton.UseVisualStyleBackColor = true;
+            this.penRadioButton.AutoSize = true;
+            this.penRadioButton.Location = new System.Drawing.Point(7, 66);
+            this.penRadioButton.Name = "penRadioButton";
+            this.penRadioButton.Size = new System.Drawing.Size(44, 17);
+            this.penRadioButton.TabIndex = 2;
+            this.penRadioButton.TabStop = true;
+            this.penRadioButton.Text = "Pen";
+            this.penRadioButton.UseVisualStyleBackColor = true;
             // 
             // mugRadioButton
             // 
@@ -114,16 +114,16 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.mugRadioButton.Text = "Mug";
             this.mugRadioButton.UseVisualStyleBackColor = true;
             // 
-            // penRadioButton
+            // usbRadioButton
             // 
-            this.penRadioButton.AutoSize = true;
-            this.penRadioButton.Location = new System.Drawing.Point(7, 66);
-            this.penRadioButton.Name = "penRadioButton";
-            this.penRadioButton.Size = new System.Drawing.Size(44, 17);
-            this.penRadioButton.TabIndex = 2;
-            this.penRadioButton.TabStop = true;
-            this.penRadioButton.Text = "Pen";
-            this.penRadioButton.UseVisualStyleBackColor = true;
+            this.usbRadioButton.AutoSize = true;
+            this.usbRadioButton.Location = new System.Drawing.Point(7, 20);
+            this.usbRadioButton.Name = "usbRadioButton";
+            this.usbRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.usbRadioButton.TabIndex = 0;
+            this.usbRadioButton.TabStop = true;
+            this.usbRadioButton.Text = "USB";
+            this.usbRadioButton.UseVisualStyleBackColor = true;
             // 
             // textToEngraveLabel
             // 
@@ -185,6 +185,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.submitButton.TabIndex = 11;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // clearButton
             // 
