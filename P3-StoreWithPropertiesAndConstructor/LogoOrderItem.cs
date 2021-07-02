@@ -170,7 +170,7 @@ namespace P3_StoreWithPropertiesAndConstructor
                 baseCost = 4 * numItems;
             }
 
-            if (text != null)
+            if (text != "")
             {
                 costPerItemWithText = .05 * numItems;
             }
@@ -180,7 +180,7 @@ namespace P3_StoreWithPropertiesAndConstructor
                 costPerItemWithLogo = .1 * numItems;
             }
 
-            if (numColors > 0)
+            if (numColors > 0 && hasLogo == true)
             {
                 costPerItemWithLogoColors = (.03 * numColors) * numItems;
             }

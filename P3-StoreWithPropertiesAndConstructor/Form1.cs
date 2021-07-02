@@ -21,12 +21,13 @@ namespace P3_StoreWithPropertiesAndConstructor
         //Submit Button will do the following:
         //1. >>>Instantiate a LogoOrderItem using the two parameter constructor.
         //Use the Text to Engrave TextBox.Text and Logo Checkbox.Checked for the two arguments needed for the constructor.
-        //2.	Read the values of the remaining items on the form and set the appropriate properties in your LogoOrderItem.
-        //3.	If there is no logo, do not charge the customer for any colors.
-        //This could be handled a number of ways, either in Calc() method or by making sure the Number of colors is
-        //set to 0 if Logo is not checked.
-        //4.	Once all properties in the LogoOrderItem are set, set the Results TextBox.Text to the return value of calling GetOrderSummary().
-        //5.	Wrap the submit button code in a try/catch block.
+        //2.	>>>Read the values of the remaining items on the form and set the appropriate properties in your LogoOrderItem.
+        //3.	>>>If there is no logo, do not charge the customer for any colors.
+        //>>>This could be handled a number of ways, either in Calc() method or by making sure the Number of colors is
+        //>>>set to 0 if Logo is not checked.
+        //4.	>>>Once all properties in the LogoOrderItem are set, set the Results TextBox.Text to the return value of calling GetOrderSummary().
+
+        //5.	DO THIS*** Wrap the submit button code in a try/catch block.
         //Catch the Exception class.
         //Display the error message to the results text box if the user fails to input correct values.
 
@@ -34,6 +35,8 @@ namespace P3_StoreWithPropertiesAndConstructor
         {
             LogoOrderItem newLogoOrderItem = BuildLogoOrderItem();
             string summary = GetOrderSummary(newLogoOrderItem);
+
+            //Sets the resultsTextBox.Text to the return value of calling GetOrderSummary() [summary]
             resultsTextBox.Text = summary;
         }
 
@@ -56,7 +59,6 @@ namespace P3_StoreWithPropertiesAndConstructor
 
             //Sets logo true/false
             newLogoOrderItem.HasLogo = this.SelectedLogo;
-
 
             return newLogoOrderItem;
         }
