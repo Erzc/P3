@@ -151,6 +151,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.logoCheckBox.TabIndex = 7;
             this.logoCheckBox.Text = "Logo?";
             this.logoCheckBox.UseVisualStyleBackColor = true;
+            this.logoCheckBox.CheckedChanged += new System.EventHandler(this.logoCheckBox_CheckedChanged);
             // 
             // numberOfColorsLabel
             // 
@@ -160,6 +161,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.numberOfColorsLabel.Size = new System.Drawing.Size(87, 13);
             this.numberOfColorsLabel.TabIndex = 8;
             this.numberOfColorsLabel.Text = "Number of colors";
+            this.numberOfColorsLabel.Visible = false;
             // 
             // numberOfColorsTextBox
             // 
@@ -167,6 +169,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.numberOfColorsTextBox.Name = "numberOfColorsTextBox";
             this.numberOfColorsTextBox.Size = new System.Drawing.Size(150, 20);
             this.numberOfColorsTextBox.TabIndex = 9;
+            this.numberOfColorsTextBox.Visible = false;
             // 
             // resultsTextBox
             // 
@@ -174,7 +177,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             this.resultsTextBox.Multiline = true;
             this.resultsTextBox.Name = "resultsTextBox";
             this.resultsTextBox.ReadOnly = true;
-            this.resultsTextBox.Size = new System.Drawing.Size(237, 76);
+            this.resultsTextBox.Size = new System.Drawing.Size(237, 133);
             this.resultsTextBox.TabIndex = 10;
             // 
             // submitButton
@@ -200,7 +203,7 @@ namespace P3_StoreWithPropertiesAndConstructor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 487);
+            this.ClientSize = new System.Drawing.Size(297, 547);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.resultsTextBox);

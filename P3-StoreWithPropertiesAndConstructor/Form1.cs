@@ -19,7 +19,7 @@ namespace P3_StoreWithPropertiesAndConstructor
 
 
         //Submit Button will do the following:
-        //1. Instantiate a LogoOrderItem using the two parameter constructor.
+        //1. >>>Instantiate a LogoOrderItem using the two parameter constructor.
         //Use the Text to Engrave TextBox.Text and Logo Checkbox.Checked for the two arguments needed for the constructor.
         //2.	Read the values of the remaining items on the form and set the appropriate properties in your LogoOrderItem.
         //3.	If there is no logo, do not charge the customer for any colors.
@@ -41,16 +41,21 @@ namespace P3_StoreWithPropertiesAndConstructor
         {
             LogoOrderItem newLogoOrderItem = new LogoOrderItem();
 
-            newLogoOrderItem.ItemID = orderNumberTextBox.Text; //Error: can't convert //INT
-            newLogoOrderItem.NumItems = numberOfItemsTextBox.Text; //^Ditto //INT
-            newLogoOrderItem.NumColors = numberOfColorsTextBox.Text; //^ //INT
-            newLogoOrderItem.Text = textToEngraveTextBox.Text; //^
+            //Converts string to int so it can be returned
+            int orderNumberTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
+            int numberOfItemsTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
+            int numberOfColorsTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
+
+            newLogoOrderItem.ItemID = orderNumberTextBoxInt; //was "orderNumberTextBox.Text"
+            newLogoOrderItem.NumItems = numberOfItemsTextBoxInt;
+            newLogoOrderItem.NumColors = numberOfColorsTextBoxInt;
+            newLogoOrderItem.Text = textToEngraveTextBox.Text;
 
             //Property access calls this method and returns appropriate value
             newLogoOrderItem.ItemType = this.SelectedItemType;
 
             //Sets logo true/false
-            newLogoOrderItem.HasLogo = this.SelectedLogo; //returns true/false
+            newLogoOrderItem.HasLogo = this.SelectedLogo;
 
 
             return newLogoOrderItem;
@@ -114,7 +119,11 @@ namespace P3_StoreWithPropertiesAndConstructor
             }
         }
 
-        //DO THIS: Set label and textbox for number of colors to only be visible when Logo is checked.
-        //To do this, handle the CheckBox.CheckedChanged event to set the Visibility properties for the Label and Checkbox.
+        //Sets label and textbox for number of colors to only be visible when Logo is checked
+        private void logoCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            numberOfColorsLabel.Visible = logoCheckBox.Checked;
+            numberOfColorsTextBox.Visible = logoCheckBox.Checked;
+        }
     }
 }

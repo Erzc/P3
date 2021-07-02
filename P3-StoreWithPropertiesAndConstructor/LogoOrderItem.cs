@@ -15,7 +15,6 @@ namespace P3_StoreWithPropertiesAndConstructor
         private int numItems;
         private string text;
 
-
         //Properties with backing fields
         public bool HasLogo
         {
@@ -116,13 +115,21 @@ namespace P3_StoreWithPropertiesAndConstructor
             ItemID = theID;
         }
 
-        //2 A constructor that takes 2 parameters: a string for text and a bool for has logo. Chain this constructor to the six parameter constructor.
+
+        //2 A constructor that takes 2 parameters: a string for text and a bool for has logo. ***Chain this constructor to the six parameter constructor.
+        public LogoOrderItem (bool hasLog, string tex)
+        {
+
+        }
 
 
 
 
         //3 A constructor that takes no parameters (a parameterless constructor). Chain this constructor to the six parameter constructor. 
+        public LogoOrderItem()
+        {
 
+        }
 
 
 
@@ -145,9 +152,48 @@ namespace P3_StoreWithPropertiesAndConstructor
         //Instance method..
         private void Calc()
         {
+            double baseCost = 0;
+            double costPerItemWithText = 0;
+            double costPerItemWithLogo = 0;
+            double costPerItemWithLogoColors = 0;
+
+            if (itemType == "USB")
+            {
+                baseCost = 1 * numItems;
+            }
+            else if (itemType == "Mug")
+            {
+                baseCost = 3.50 * numItems;
+            }
+            else if (itemType == "Pen")
+            {
+                baseCost = 4 * numItems;
+            }
+
+            if (text != null)
+            {
+                costPerItemWithText = .05 * numItems;
+            }
+
+            if (hasLogo == true)
+            {
+                costPerItemWithLogo = .1 * numItems;
+            }
+
+            if (numColors > 0)
+            {
+                costPerItemWithLogoColors = (.03 * numColors) * numItems;
+            }
+
+            TotalPrice = baseCost + costPerItemWithText + costPerItemWithLogo + costPerItemWithLogoColors;
+
         }
 
-
+        // Each item has a base cost for the item and then a price for the logo. Base prices are:
+        // $1.00 for pens, $3.50 for mugs, $4.00 for usb drives. If there is text placed on the object the price is $0.05 per item.
+        //Price for the logo are based on the following:
+        //•	Graphic Logo: $0.10 per item (pen, mug or usb)
+        //•	Color: $0.03 per color per item.
 
 
 
