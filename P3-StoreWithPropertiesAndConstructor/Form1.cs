@@ -17,10 +17,6 @@ namespace P3_StoreWithPropertiesAndConstructor
             InitializeComponent();
         }
 
-        //Submit Button will do the following:
-        //1. >>>Instantiate a LogoOrderItem using the two parameter constructor.
-        //Use the Text to Engrave TextBox.Text and Logo Checkbox.Checked for the two arguments needed for the constructor.
-
         private void submitButton_Click(object sender, EventArgs e)
         {
             //Try catch block for exception handling
@@ -28,6 +24,10 @@ namespace P3_StoreWithPropertiesAndConstructor
             {
                 //Instantiates a new instance of the LogoOrderItem class
                 LogoOrderItem newLogoOrderItem = BuildLogoOrderItem();
+
+                //Uses textToEngraveTextBox.Text and SelectedLogo for the two arguments needed for the constructor
+                newLogoOrderItem.HasLogo = this.SelectedLogo; //Sets logo true/false
+                newLogoOrderItem.Text = textToEngraveTextBox.Text;
 
                 //Sets the resultsTextBox.Text to the return value of calling GetOrderSummary() [summary]
                 string summary = GetOrderSummary(newLogoOrderItem);
@@ -40,7 +40,7 @@ namespace P3_StoreWithPropertiesAndConstructor
                 resultsTextBox.Text = "Error! Incorrect format.";
             }
 
-            //Catches unexpectedly deep recursion (i.e. infinite loop)
+            //Catches unexpectedly deep recursion
             catch (System.OverflowException)
             {
                 resultsTextBox.Text = "Error! Value is either too small or too large.";
@@ -57,21 +57,25 @@ namespace P3_StoreWithPropertiesAndConstructor
         {
             LogoOrderItem newLogoOrderItem = new LogoOrderItem();
 
-            //Converts string to int so it can be returned
-            int orderNumberTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
-            int numberOfItemsTextBoxInt = Convert.ToInt32(numberOfItemsTextBox.Text);
-            int numberOfColorsTextBoxInt = Convert.ToInt32(numberOfColorsTextBox.Text);
-
-            newLogoOrderItem.ItemID = orderNumberTextBoxInt; //was "orderNumberTextBox.Text"
-            newLogoOrderItem.NumItems = numberOfItemsTextBoxInt;
-            newLogoOrderItem.NumColors = numberOfColorsTextBoxInt;
-            newLogoOrderItem.Text = textToEngraveTextBox.Text;
+            //If text box not empty, converts string to int so it can be returned. Many format errors without this!
+            if (orderNumberTextBox.Text != "")
+            {
+                int orderNumberTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
+                newLogoOrderItem.ItemID = orderNumberTextBoxInt;
+            }
+            if (numberOfItemsTextBox.Text != "")
+            {
+                int numberOfItemsTextBoxInt = Convert.ToInt32(numberOfItemsTextBox.Text);
+                newLogoOrderItem.NumItems = numberOfItemsTextBoxInt;
+            }
+            if (numberOfColorsTextBox.Text != "")
+            {
+                int numberOfColorsTextBoxInt = Convert.ToInt32(numberOfColorsTextBox.Text);
+                newLogoOrderItem.NumColors = numberOfColorsTextBoxInt;
+            }
 
             //Property access calls this method and returns appropriate value
             newLogoOrderItem.ItemType = this.SelectedItemType;
-
-            //Sets logo true/false
-            newLogoOrderItem.HasLogo = this.SelectedLogo;
 
             return newLogoOrderItem;
         }
@@ -112,7 +116,6 @@ namespace P3_StoreWithPropertiesAndConstructor
                 {
                     return "Undeclared";
                 }
-
             }
         }
 
@@ -139,18 +142,16 @@ namespace P3_StoreWithPropertiesAndConstructor
             numberOfColorsTextBox.Visible = logoCheckBox.Checked;
         }
 
-
         //Clear Button resets all the items on the form -- this is a little buggy.. -E
         private void clearButton_Click(object sender, EventArgs e)
         {
-                orderNumberTextBox.Text = "";
-                numberOfItemsTextBox.Text = "";
-                numberOfColorsTextBox.Text = "";
-                textToEngraveTextBox.Text = "";
-                mugRadioButton.Checked = true;
-                mugRadioButton.Checked = true;
-                logoCheckBox.Checked = false;
-                resultsTextBox.Text = "";
+            orderNumberTextBox.Text = "";
+            numberOfItemsTextBox.Text = "";
+            numberOfColorsTextBox.Text = "";
+            textToEngraveTextBox.Text = "";
+            mugRadioButton.Checked = true;
+            logoCheckBox.Checked = false;
+            resultsTextBox.Text = "";
         }
     }
 }

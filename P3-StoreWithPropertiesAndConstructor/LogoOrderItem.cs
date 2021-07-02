@@ -82,21 +82,13 @@ namespace P3_StoreWithPropertiesAndConstructor
         }
 
         //Auto-property
-        public int ItemID { get; set; } //added get set
-
+        public int ItemID { get; set; }
 
         //Read-only auto-property - decimal for the total price of all items with all options
-        public double TotalPrice { get; private set; } //change?
+        public double TotalPrice { get; private set; }
 
-
-
-        //Add three constructors to your LogoOrderItem class:
-
-
-        //1 A constructor that takes six parameters (one for each settable property in the class).
-        //In the body of this constructor set each parameter into the appropriate class property or field.
-
-        public LogoOrderItem(bool hasLog, string itemTyp, int numCol, int numItem, string tex, int theID)
+        //Constructor that sets each parameter into the appropriate class property or field.
+        public LogoOrderItem(bool hasLog, string itemTyp, int numCol, int numItem, string tex, int theID): this(hasLog, tex)
         {
             HasLogo = hasLog;
             ItemType = itemTyp;
@@ -106,37 +98,15 @@ namespace P3_StoreWithPropertiesAndConstructor
             ItemID = theID;
         }
 
-
-        //2 A constructor that takes 2 parameters: a string for text and a bool for has logo. ***Chain this constructor to the six parameter constructor.
-        public LogoOrderItem (bool hasLog, string tex)
+        //Constructor that takes 2 parameters. Chained this constructor
+        public LogoOrderItem(bool hasLog, string tex): this ()
         {
-
         }
 
-
-
-
-        //3 A constructor that takes no parameters (a parameterless constructor). Chain this constructor to the six parameter constructor. 
+        //Parameterless constructor. Chained this constructor
         public LogoOrderItem()
         {
-
         }
-
-
-
-
-
-        //Default values for chaining should be:
-        //•	itemID: -1
-        //•	itemType: “mug”
-        //•	numColors: 0
-        //•	numItems: 0
-        //•	hasLogo: false
-
-
-
-
-
 
         //Instance method calculates the total price of the order
         private void Calc()
