@@ -9,7 +9,7 @@ namespace P3_StoreWithPropertiesAndConstructor
     class LogoOrderItem
     {
         //Declare variables
-        private bool hasLogo; //added these
+        private bool hasLogo;
         private string itemType;
         private int numColors;
         private int numItems;
@@ -81,21 +81,12 @@ namespace P3_StoreWithPropertiesAndConstructor
             }
         }
 
-
-
         //Auto-property
         public int ItemID { get; set; } //added get set
 
 
-        //Include the following read-only auto-properties: 
-        //A read only decimal for the total price of all items with all options
-
-        //Read-only auto-property:
+        //Read-only auto-property - decimal for the total price of all items with all options
         public double TotalPrice { get; private set; } //change?
-
-
-
-
 
 
 
@@ -147,19 +138,19 @@ namespace P3_StoreWithPropertiesAndConstructor
 
 
 
-        //this calculates the price of the logo item based on the type of item whether or not it is a graphic or text only logo, number of colors and number of items.
-        //Make sure to read the customers’ requirements above carefully and implement their business rules into the Calc() correctly.
-        //Instance method..
+        //Instance method calculates the total price of the order
         private void Calc()
         {
+            //Declare variables, initializes cost to $0
             double baseCost = 0;
             double costPerItemWithText = 0;
             double costPerItemWithLogo = 0;
             double costPerItemWithLogoColors = 0;
 
+            //$1.00 for pens, $3.50 for mugs, $4.00 for usb drives
             if (itemType == "USB")
             {
-                baseCost = 1 * numItems;
+                baseCost = 4 * numItems;
             }
             else if (itemType == "Mug")
             {
@@ -167,38 +158,28 @@ namespace P3_StoreWithPropertiesAndConstructor
             }
             else if (itemType == "Pen")
             {
-                baseCost = 4 * numItems;
+                baseCost = 1 * numItems;
             }
 
+            //If text placed on the object, price is $0.05 per item
             if (text != "")
             {
                 costPerItemWithText = .05 * numItems;
             }
 
+            //If Graphic Logo, price is $0.10 per item
             if (hasLogo == true)
             {
                 costPerItemWithLogo = .1 * numItems;
             }
 
+            //If Graphic Logo and more than 0 colors, $0.03 per color per item
             if (numColors > 0 && hasLogo == true)
             {
                 costPerItemWithLogoColors = (.03 * numColors) * numItems;
             }
 
             TotalPrice = baseCost + costPerItemWithText + costPerItemWithLogo + costPerItemWithLogoColors;
-
         }
-
-        // Each item has a base cost for the item and then a price for the logo. Base prices are:
-        // $1.00 for pens, $3.50 for mugs, $4.00 for usb drives. If there is text placed on the object the price is $0.05 per item.
-        //Price for the logo are based on the following:
-        //•	Graphic Logo: $0.10 per item (pen, mug or usb)
-        //•	Color: $0.03 per color per item.
-
-
-
-
-
-        //A Clear Button resets all the items on the form to the defaults
     }
 }

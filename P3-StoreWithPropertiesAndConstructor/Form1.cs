@@ -17,27 +17,40 @@ namespace P3_StoreWithPropertiesAndConstructor
             InitializeComponent();
         }
 
-
         //Submit Button will do the following:
         //1. >>>Instantiate a LogoOrderItem using the two parameter constructor.
         //Use the Text to Engrave TextBox.Text and Logo Checkbox.Checked for the two arguments needed for the constructor.
-        //2.	>>>Read the values of the remaining items on the form and set the appropriate properties in your LogoOrderItem.
-        //3.	>>>If there is no logo, do not charge the customer for any colors.
-        //>>>This could be handled a number of ways, either in Calc() method or by making sure the Number of colors is
-        //>>>set to 0 if Logo is not checked.
-        //4.	>>>Once all properties in the LogoOrderItem are set, set the Results TextBox.Text to the return value of calling GetOrderSummary().
-
-        //5.	DO THIS*** Wrap the submit button code in a try/catch block.
-        //Catch the Exception class.
-        //Display the error message to the results text box if the user fails to input correct values.
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            LogoOrderItem newLogoOrderItem = BuildLogoOrderItem();
-            string summary = GetOrderSummary(newLogoOrderItem);
+            //Try catch block for exception handling
+            try
+            {
+                //Instantiates a new instance of the LogoOrderItem class
+                LogoOrderItem newLogoOrderItem = BuildLogoOrderItem();
 
-            //Sets the resultsTextBox.Text to the return value of calling GetOrderSummary() [summary]
-            resultsTextBox.Text = summary;
+                //Sets the resultsTextBox.Text to the return value of calling GetOrderSummary() [summary]
+                string summary = GetOrderSummary(newLogoOrderItem);
+                resultsTextBox.Text = summary;
+            }
+
+            //Catches format/type that is not valid for conversion
+            catch (System.FormatException)
+            {
+                resultsTextBox.Text = "Error! Incorrect format.";
+            }
+
+            //Catches unexpectedly deep recursion (i.e. infinite loop)
+            catch (System.OverflowException)
+            {
+                resultsTextBox.Text = "Error! Value is either too small or too large.";
+            }
+
+            //Catches all other exceptions thrown and writes type
+            catch (System.Exception exc)
+            {
+                resultsTextBox.Text = "Error! " + exc.Message + "\nException type: " + exc.GetType();
+            }
         }
 
         private LogoOrderItem BuildLogoOrderItem()
@@ -46,8 +59,8 @@ namespace P3_StoreWithPropertiesAndConstructor
 
             //Converts string to int so it can be returned
             int orderNumberTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
-            int numberOfItemsTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
-            int numberOfColorsTextBoxInt = Convert.ToInt32(orderNumberTextBox.Text);
+            int numberOfItemsTextBoxInt = Convert.ToInt32(numberOfItemsTextBox.Text);
+            int numberOfColorsTextBoxInt = Convert.ToInt32(numberOfColorsTextBox.Text);
 
             newLogoOrderItem.ItemID = orderNumberTextBoxInt; //was "orderNumberTextBox.Text"
             newLogoOrderItem.NumItems = numberOfItemsTextBoxInt;
@@ -74,8 +87,6 @@ namespace P3_StoreWithPropertiesAndConstructor
                 "\r\nLogo: " + newLogoOrderItem.HasLogo +
                 "\r\nNumber of colors: " + newLogoOrderItem.NumColors +
                 "\r\nTotal price of all items: " + newLogoOrderItem.TotalPrice;
-                //A read only decimal for the total price of all items with all options
-
 
             return summary;
         }
@@ -126,6 +137,20 @@ namespace P3_StoreWithPropertiesAndConstructor
         {
             numberOfColorsLabel.Visible = logoCheckBox.Checked;
             numberOfColorsTextBox.Visible = logoCheckBox.Checked;
+        }
+
+
+        //Clear Button resets all the items on the form -- this is a little buggy.. -E
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+                orderNumberTextBox.Text = "";
+                numberOfItemsTextBox.Text = "";
+                numberOfColorsTextBox.Text = "";
+                textToEngraveTextBox.Text = "";
+                mugRadioButton.Checked = true;
+                mugRadioButton.Checked = true;
+                logoCheckBox.Checked = false;
+                resultsTextBox.Text = "";
         }
     }
 }
